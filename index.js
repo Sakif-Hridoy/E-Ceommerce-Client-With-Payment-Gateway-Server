@@ -18,8 +18,8 @@ const port = 5000;
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
-        const productsCollection = client.db("emaJohnStore").collection("products");
-        const ordersCollection = client.db("emaJohnStore").collection("orders");
+        const productsCollection = client.db("ema-ecommerce").collection("products");
+        const ordersCollection = client.db("ema-ecommerce").collection("orders");
 
 
   // perform actions on the collection object
@@ -28,10 +28,11 @@ client.connect(err => {
         const products = req.body;
         
         // console.log(products)
-        productsCollection.insertOne(products)
+        productsCollection.insertMany(products)
         .then(result => {
-            console.log(result.insertedCount);
-            res.send(result.insertedCount)
+            console.log(result)
+            // console.log(result.insertedCount);
+            // res.send(result.insertedCount)
         })
     })
 
